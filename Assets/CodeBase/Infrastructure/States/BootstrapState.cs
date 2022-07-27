@@ -1,4 +1,8 @@
+using CodeBase.Infrastructure.AssetManagement;
 using CodeBase.Infrastructure.Services;
+using CodeBase.Infrastructure.Services.StaticData;
+using CodeBase.UI.Factory;
+using CodeBase.UI.Services.Windows;
 
 namespace CodeBase.Infrastructure.States {
     public class BootstrapState : IState {
@@ -20,6 +24,18 @@ namespace CodeBase.Infrastructure.States {
 
         public void Exit() { }
 
-        private void RegisterServices() { }
+        private void RegisterServices() {
+            RegisterStaticDataService();
+            _services.RegisterSingle<IAssetProvider>(new AssetProvider());
+            _services.RegisterSingle<IUIFactory>(new UIFactory(_services.GetSingle<IAssetProvider>(),
+                _services.GetSingle<IStaticDataService>()));
+            _services.RegisterSingle<IWindowService>(new WindowService(_services.GetSingle<IUIFactory>()));
+        }
+
+        private void RegisterStaticDataService() {
+            IStaticDataService staticDataService = new StaticDataService();
+            staticDataService.LoadWindowsData();
+            _services.RegisterSingle<IStaticDataService>(staticDataService);
+        }
     }
 }

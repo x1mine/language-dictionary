@@ -1,4 +1,3 @@
-using CodeBase.Infrastructure.States;
 using UnityEngine;
 
 namespace CodeBase.Infrastructure {
@@ -7,7 +6,7 @@ namespace CodeBase.Infrastructure {
 
         private void Awake() {
             _application = new App(this);
-            _application.StateMachine.Enter<BootstrapState>();
+            _application.Boot();
 
             DontDestroyOnLoad(this);
         }

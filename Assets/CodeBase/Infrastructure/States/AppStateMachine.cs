@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using CodeBase.Infrastructure.Services;
+using CodeBase.UI.Factory;
 
 namespace CodeBase.Infrastructure.States {
     public class AppStateMachine {
@@ -11,7 +12,7 @@ namespace CodeBase.Infrastructure.States {
             _states = new Dictionary<Type, IExitableState> {
                 { typeof(BootstrapState), new BootstrapState(this, sceneLoader, services) },
                 { typeof(LoadDataState), new LoadDataState(this, services) },
-                {typeof(LoadSceneState), new LoadSceneState(this, sceneLoader, services)}
+                { typeof(LoadSceneState), new LoadSceneState(this, sceneLoader, services.GetSingle<IUIFactory>()) }
             };
         }
 
