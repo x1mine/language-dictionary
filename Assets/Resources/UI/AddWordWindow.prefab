@@ -269,8 +269,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 14
-  m_fontSizeBase: 14
+  m_fontSize: 26
+  m_fontSizeBase: 26
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 0
@@ -511,7 +511,7 @@ GameObject:
   - component: {fileID: 4102628671224395030}
   - component: {fileID: 7827829141305302296}
   m_Layer: 5
-  m_Name: AddWordContainer
+  m_Name: AddWordWindow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -560,6 +560,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _closeButton: {fileID: 4102628670462729542}
+  _foreignInputField: {fileID: 4102628672251451111}
+  _nativeInputField: {fileID: 4102628670519171505}
+  _addWordButton: {fileID: 4102628672220801806}
 --- !u!1 &4102628671354336113
 GameObject:
   m_ObjectHideFlags: 0
@@ -702,8 +705,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 28.95
-  m_fontSizeBase: 28.95
+  m_fontSize: 26
+  m_fontSizeBase: 26
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 0
@@ -1155,8 +1158,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 14
-  m_fontSizeBase: 14
+  m_fontSize: 26
+  m_fontSizeBase: 26
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 0
@@ -1390,8 +1393,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 28.95
-  m_fontSizeBase: 28.95
+  m_fontSize: 26
+  m_fontSizeBase: 26
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 0

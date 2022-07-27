@@ -1,17 +1,20 @@
-using CodeBase.Infrastructure.Services;
+using CodeBase.Data;
+using CodeBase.Infrastructure.Services.PersistentData;
+using CodeBase.Infrastructure.Services.SaveLoad;
 
 namespace CodeBase.Infrastructure.States {
     public class LoadDataState : IState {
         private readonly AppStateMachine _stateMachine;
+        private readonly IPersistentDataService _dataService;
+        private readonly ISaveLoadService _saveLoadService;
         private readonly SceneLoader _sceneLoader;
-        private readonly AllServices _services;
 
-        public LoadDataState(AppStateMachine stateMachine, AllServices services) {
+        public LoadDataState(AppStateMachine stateMachine, IPersistentDataService dataService, ISaveLoadService saveLoadService) {
             _stateMachine = stateMachine;
-            _services = services;
+            _dataService = dataService;
+            _saveLoadService = saveLoadService;
         }
-
-
+        
         public void Enter() {
             LoadData();
             _stateMachine.Enter<LoadSceneState, string>("Main");
@@ -19,8 +22,12 @@ namespace CodeBase.Infrastructure.States {
 
         public void Exit() { }
 
-        private void LoadData() {
-            //TODO: Load data
+        private void LoadData() => 
+            _dataService.Data = _saveLoadService.LoadProgress() ?? NewData();
+
+        private UserData NewData() {
+            UserData data = new UserData();
+            return data;
         }
     }
 }

@@ -1,6 +1,9 @@
 using System;
 using System.Collections.Generic;
+using CodeBase.Infrastructure.Factory;
 using CodeBase.Infrastructure.Services;
+using CodeBase.Infrastructure.Services.PersistentData;
+using CodeBase.Infrastructure.Services.SaveLoad;
 using CodeBase.UI.Factory;
 
 namespace CodeBase.Infrastructure.States {
@@ -10,9 +13,15 @@ namespace CodeBase.Infrastructure.States {
 
         public AppStateMachine(SceneLoader sceneLoader, AllServices services) {
             _states = new Dictionary<Type, IExitableState> {
-                { typeof(BootstrapState), new BootstrapState(this, sceneLoader, services) },
-                { typeof(LoadDataState), new LoadDataState(this, services) },
-                { typeof(LoadSceneState), new LoadSceneState(this, sceneLoader, services.GetSingle<IUIFactory>()) }
+                { typeof(BootstrapState), new BootstrapState(this, sceneLoader, services) }, {
+                    typeof(LoadDataState),
+                    new LoadDataState(this, services.GetSingle<IPersistentDataService>(),
+                        services.GetSingle<ISaveLoadService>())
+                }, {
+                    typeof(LoadSceneState),
+                    new LoadSceneState(this, sceneLoader, services.GetSingle<IUIFactory>(),
+                        services.GetSingle<IAppFactory>(), services.GetSingle<IPersistentDataService>())
+                }
             };
         }
 

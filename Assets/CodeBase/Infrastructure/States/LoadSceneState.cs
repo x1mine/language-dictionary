@@ -1,4 +1,7 @@
+using CodeBase.Dictionary;
+using CodeBase.Infrastructure.Factory;
 using CodeBase.Infrastructure.Services;
+using CodeBase.Infrastructure.Services.PersistentData;
 using CodeBase.UI.Factory;
 
 namespace CodeBase.Infrastructure.States {
@@ -7,11 +10,16 @@ namespace CodeBase.Infrastructure.States {
         private readonly SceneLoader _sceneLoader;
         private readonly IUIFactory _uiFactory;
         private readonly AllServices _services;
+        private readonly IAppFactory _appFactory;
+        private readonly IPersistentDataService _dataService;
 
-        public LoadSceneState(AppStateMachine stateMachine, SceneLoader sceneLoader, IUIFactory uiFactory) {
+        public LoadSceneState(AppStateMachine stateMachine, SceneLoader sceneLoader, IUIFactory uiFactory,
+            IAppFactory appFactory, IPersistentDataService dataService) {
             _stateMachine = stateMachine;
             _sceneLoader = sceneLoader;
             _uiFactory = uiFactory;
+            _appFactory = appFactory;
+            _dataService = dataService;
         }
 
         public void Enter(string sceneName) {
@@ -20,10 +28,21 @@ namespace CodeBase.Infrastructure.States {
 
         public void Exit() { }
 
-        private void OnLoaded() =>
-            InitUIRoot();
+        private void OnLoaded() {
+            InitUIRoot(InitDictionary());
+            InformProgressReaders();
+        }
 
-        private void InitUIRoot() =>
-            _services.GetSingle<IUIFactory>().CreateUIRoot();
+        private WordsDictionary InitDictionary() => 
+            _appFactory.CreateDictionary();
+
+        private void InformProgressReaders() {
+            foreach (var reader in _appFactory.DataReaders) {
+                reader.LoadData(_dataService.Data);
+            }
+        }
+
+        private void InitUIRoot(WordsDictionary wordsDictionary) =>
+            _uiFactory.CreateUIRoot(wordsDictionary);
     }
 }
