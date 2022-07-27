@@ -19,14 +19,12 @@ namespace CodeBase.Infrastructure.Services.SaveLoad {
             foreach (var writer in _appFactory.DataWriters)
                 writer.UpdateData(_dataService.Data);
 
-            Debug.Log(_dataService.Data.DictionaryData.Words.Count);
+            Debug.Log(_dataService.Data.ToJson());
 
             PlayerPrefs.SetString(DataKey, _dataService.Data.ToJson());
         }
 
-        public UserData LoadProgress() {
-            Debug.Log(PlayerPrefs.GetString(DataKey));
-            return PlayerPrefs.GetString(DataKey)?.ToDeserialized<UserData>();
-        }
+        public UserData LoadProgress() => 
+            PlayerPrefs.GetString(DataKey)?.ToDeserialized<UserData>();
     }
 }

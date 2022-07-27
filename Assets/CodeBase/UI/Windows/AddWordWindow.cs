@@ -6,6 +6,7 @@ namespace CodeBase.UI.Windows {
     public class AddWordWindow : WindowBase {
         [SerializeField] private TMP_InputField _foreignInputField;
         [SerializeField] private TMP_InputField _nativeInputField;
+        [SerializeField] private TMP_Text _textLog;
         [SerializeField] private Button _addWordButton;
 
         protected override void OnAwake() {
@@ -13,12 +14,11 @@ namespace CodeBase.UI.Windows {
             _addWordButton.onClick.AddListener(AddWord);
         }
 
-        private void AddWord() {
-            Dictionary.AddWord(_foreignInputField.text, _nativeInputField.text);
-            CleanInputFields();
-        }
+        private void AddWord() =>
+            WordsDictionary.AddWord(_foreignInputField.text, _nativeInputField.text, OnWordAdded);
 
-        private void CleanInputFields() {
+        private void OnWordAdded() {
+            _textLog.text = "Word added";
             _foreignInputField.text = string.Empty;
             _nativeInputField.text = string.Empty;
         }

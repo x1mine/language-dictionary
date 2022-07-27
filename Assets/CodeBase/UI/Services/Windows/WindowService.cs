@@ -8,14 +8,7 @@ namespace CodeBase.UI.Services.Windows {
             _uiFactory = uiFactory;
         }
 
-        public void Open(WindowId windowId) {
-            switch (windowId) {
-                case WindowId.None:
-                    break;
-                case WindowId.AddWord:
-                    _uiFactory.CreateAddWordWindow();
-                    break;
-            }
-        }
+        public void Open(WindowId windowId) => 
+            _uiFactory.CreateWindow(windowId);
     }
 }

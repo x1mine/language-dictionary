@@ -7,14 +7,14 @@ using UnityEngine.UI;
 namespace CodeBase.UI.Windows {
     public abstract class WindowBase : MonoBehaviour {
         [SerializeField] private Button _closeButton;
-
-        protected IPersistentDataService DataService;
+        
         protected UserData Data => DataService.Data;
-        protected WordsDictionary Dictionary;
+        protected WordsDictionary WordsDictionary;
+        protected IPersistentDataService DataService;
 
         public void Construct(IPersistentDataService dataService, WordsDictionary wordsDictionary) {
             DataService = dataService;
-            Dictionary = wordsDictionary;
+            WordsDictionary = wordsDictionary;
         }
 
         private void Awake() =>

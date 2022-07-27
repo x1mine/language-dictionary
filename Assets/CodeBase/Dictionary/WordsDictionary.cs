@@ -1,30 +1,25 @@
+using System;
 using System.Collections.Generic;
-using System.Linq;
 using CodeBase.Data;
 using CodeBase.Infrastructure.Services.PersistentData;
-using UnityEngine;
 
 namespace CodeBase.Dictionary {
     public class WordsDictionary : ISavedData {
-        private Dictionary<string, string> _dictionary;
+        public Dictionary<string, string> Dictionary { get; private set; }
 
         public WordsDictionary() =>
-            _dictionary = new Dictionary<string, string>();
+            Dictionary = new Dictionary<string, string>();
 
-        public void AddWord(string word, string translation) {
-            if (_dictionary.ContainsKey(word)) return;
-            
-            Debug.Log($"{word} -> {translation}");
-            _dictionary.Add(word, translation);
+        public void AddWord(string word, string translation, Action onAdded = null) {
+            if (Dictionary.ContainsKey(word) || word == string.Empty || translation == string.Empty) return;
+            Dictionary.Add(word, translation);
+            onAdded?.Invoke();
         }
 
-        public void LoadData(UserData data) {
-            _dictionary = data.DictionaryData.Words.ToDictionary(x => x.Key, x => x.Value);
-        }
+        public void LoadData(UserData data) =>
+            Dictionary = data.DictionaryData.Words;
 
-        public void UpdateData(UserData data) {
-            data.DictionaryData.Words = _dictionary.ToDictionary(x => x.Key, x => x.Value);
-            Debug.Log("Data saved");
-        }
+        public void UpdateData(UserData data) =>
+            data.DictionaryData.Words = Dictionary;
     }
 }

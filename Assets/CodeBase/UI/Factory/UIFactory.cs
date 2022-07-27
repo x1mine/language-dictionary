@@ -22,8 +22,11 @@ namespace CodeBase.UI.Factory {
             _dataService = dataService;
         }
 
-        public void CreateAddWordWindow() {
-            var config = _staticDataService.ForWindow(WindowId.AddWord);
+        public void CreateWindow(WindowId windowId) {
+            var config = _staticDataService.ForWindow(windowId);
+            if (config == null)
+                return;
+            
             Object.Instantiate(config.Prefab, _uiRoot)
                 .With(window => window.Construct(_dataService, _dictionary));
         }
