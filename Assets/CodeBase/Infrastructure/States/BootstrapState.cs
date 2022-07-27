@@ -27,8 +27,8 @@ namespace CodeBase.Infrastructure.States {
 
         private void RegisterServices() {
             RegisterStaticDataService();
-            _services.RegisterSingle<IAppFactory>(new AppFactory());
             _services.RegisterSingle<IPersistentDataService>(new PersistentDataService());
+            _services.RegisterSingle<IAppFactory>(new AppFactory());
             _services.RegisterSingle<ISaveLoadService>(
                 new SaveLoadService(_services.GetSingle<IPersistentDataService>(), _services.GetSingle<IAppFactory>()));
             _services.RegisterSingle<IAssetProvider>(new AssetProvider());

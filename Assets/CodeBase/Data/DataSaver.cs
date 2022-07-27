@@ -4,14 +4,14 @@ using UnityEngine;
 
 namespace CodeBase.Data {
     public class DataSaver : MonoBehaviour {
-        private void Awake() => 
+        private ISaveLoadService _saveLoadService;
+
+        private void Awake() {
             DontDestroyOnLoad(this);
-
-        private void OnApplicationQuit() {
-            AllServices.Container
-                .GetSingle<ISaveLoadService>()?
-                .SaveProgress();
-
+            _saveLoadService = AllServices.Container.GetSingle<ISaveLoadService>();
         }
+
+        private void OnApplicationQuit() =>
+            _saveLoadService.SaveProgress();
     }
 }
