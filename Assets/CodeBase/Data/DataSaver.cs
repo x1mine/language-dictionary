@@ -11,7 +11,7 @@ namespace CodeBase.Data {
             _saveLoadService = AllServices.Container.GetSingle<ISaveLoadService>();
         }
 
-        private void OnApplicationQuit() =>
+        private void OnApplicationPause(bool pauseStatus) =>
             _saveLoadService.SaveProgress();
     }
 }

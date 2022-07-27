@@ -19,8 +19,6 @@ namespace CodeBase.Dictionary {
             if (Dictionary.ContainsKey(word) || word == string.Empty || translation == string.Empty) return;
             Dictionary.Add(word, translation);
             onAdded?.Invoke();
-
-            _saveLoadService.SaveProgress();
         }
 
         public void LoadData(UserData data) =>
