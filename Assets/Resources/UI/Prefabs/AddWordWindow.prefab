@@ -200,6 +200,7 @@ MonoBehaviour:
   _nativeInputField: {fileID: 3187554988677352279}
   _textLog: {fileID: 1500559961567803989}
   _addWordButton: {fileID: 2181669554788658902}
+  _timeToHideLog: 1.5
 --- !u!1 &3187554987930009164
 GameObject:
   m_ObjectHideFlags: 0
