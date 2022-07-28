@@ -13,5 +13,8 @@ namespace CodeBase.Data {
 
         private void OnApplicationPause(bool pauseStatus) =>
             _saveLoadService.SaveProgress();
+        
+        private void OnApplicationQuit() =>
+            _saveLoadService.SaveProgress();
     }
 }

@@ -1,10 +1,10 @@
 using CodeBase.Extensions;
-using TMPro;
+using CodeBase.UI.Elements;
 using UnityEngine;
 
 namespace CodeBase.UI.Windows {
     public class WordsListWindow : WindowBase {
-        [SerializeField] private TMP_Text _text;
+        [SerializeField] private WordItem _wordItem;
         [SerializeField] private Transform _content;
 
         protected override void Initialize() =>
@@ -12,7 +12,8 @@ namespace CodeBase.UI.Windows {
 
         private void UpdateList() {
             foreach (var pair in WordsDictionary.Dictionary) {
-                Instantiate(_text, _content).With(text => text.text = $"{pair.Key} -> {pair.Value}");
+                Instantiate(_wordItem, _content)
+                    .With(item => item.Construct(WordsDictionary, pair.Key, pair.Key));
             }
         }
     }

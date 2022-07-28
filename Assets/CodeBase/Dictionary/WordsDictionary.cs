@@ -16,6 +16,12 @@ namespace CodeBase.Dictionary {
             onAdded?.Invoke();
         }
 
+        public void DeleteWord(string word, Action onDeleted = null) {
+            if (!Dictionary.ContainsKey(word)) return;
+            Dictionary.Remove(word);
+            onDeleted?.Invoke();
+        }
+
         public void LoadData(UserData data) =>
             Dictionary = data.DictionaryData.Words;
 

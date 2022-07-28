@@ -338,7 +338,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _closeButton: {fileID: 3902205499230910070}
-  _text: {fileID: 1347533447413934118, guid: 3866702c25bcbfa439d9f1eefd39f8b0, type: 3}
+  _wordItem: {fileID: 560303166781225861, guid: e7b41783bae1d1a4bbf5a36cad91fe1e, type: 3}
   _content: {fileID: 4405125151925790417}
 --- !u!1 &8088714797657001090
 GameObject:

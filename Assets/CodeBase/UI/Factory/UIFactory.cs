@@ -8,7 +8,7 @@ using UnityEngine;
 
 namespace CodeBase.UI.Factory {
     public class UIFactory : IUIFactory {
-        private const string UIRootPath = "UI/UIRoot";
+        private const string UIRootPath = "UI/Prefabs/UIRoot";
         private readonly IAssetProvider _assets;
         private readonly IStaticDataService _staticDataService;
         private readonly IPersistentDataService _dataService;
