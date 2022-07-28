@@ -13,7 +13,7 @@ namespace CodeBase.UI.Windows {
         private void UpdateList() {
             foreach (var pair in WordsDictionary.Dictionary) {
                 Instantiate(_wordItem, _content)
-                    .With(item => item.Construct(WordsDictionary, pair.Key, pair.Key));
+                    .With(item => item.Construct(WordsDictionary, pair.Key, pair.Value));
             }
         }
     }
